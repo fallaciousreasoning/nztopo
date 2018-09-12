@@ -10,7 +10,8 @@
 ## Stretch
 - [] Current position marker
 - [] Position markers
-- [] Cache area of map
+- [] Add ability to search locations
 
 ## Ultra Stretch
 - [] Position tracking (e.g. show route walked so far)
+- [] Cache area of map
