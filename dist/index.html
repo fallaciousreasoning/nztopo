@@ -28,9 +28,23 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
     <script>
+        const initialPosition = JSON.parse(localStorage.getItem('position'));
         const map = L.map('map', {
-            zoomSnap: 0
+            zoomSnap: 0,
         }).fitWorld();
+
+        if (initialPosition)
+            map.setView(initialPosition, initialPosition.zoom);
+
+        const savePosition = () => {
+            const position = { 
+                ...map.getCenter(),
+                zoom: map.getZoom()
+            };
+            localStorage.setItem("position", JSON.stringify(position));
+        }
+        map.on('moveend', savePosition);
+        map.on('zoomend', savePosition);
 
         const linzUrl =
             'http://tiles-a.data-cdn.linz.govt.nz/services;key=fcac9d10d1c84527bd2a1ca2a35681d8/tiles/v4/layer=50767/EPSG:3857/{z}/{x}/{y}.png';
